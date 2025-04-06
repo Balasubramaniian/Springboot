@@ -1,11 +1,14 @@
 package com.complaintProject.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +38,18 @@ public class UserController {
 	public ResponseEntity<User> createUser( @RequestBody User user){
 		User u=repo.save(user);
 		return ResponseEntity.ok(u);
+	}
+	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable Integer id,@RequestBody User particularuser){
+		
+		Optional<User> user= repo.findById(id);
+		
+		User u=user.get();
+		u.setName(particularuser.getName());
+		
+		return ResponseEntity.ok(u);
+				
 	}
 
 	
