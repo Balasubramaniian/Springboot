@@ -7,7 +7,7 @@ import com.complaintProject.Model.User;
 
 @SpringBootApplication
 public class LearningDemoApplication {
-
+ 
 	public static void main(String[] args) {
 		SpringApplication.run(LearningDemoApplication.class, args);
 		User user=new User();
