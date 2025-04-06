@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,6 +51,18 @@ public class UserController {
 		return ResponseEntity.ok(u);
 				
 	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+	    Optional<User> user = repo.findById(id);
+	    
+	    if (user.isPresent()) {
+	        repo.deleteById(id);
+	        return ResponseEntity.ok("User deleted successfully");
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+	    }
+}
 
 	
 }
